@@ -1,7 +1,11 @@
 #include "AppDelegate.h"
+#include "SimpleAudioEngine.h"
 #include "HelloWorldScene.h"
 
+#include "AudioEngine.h"
+
 USING_NS_CC;
+using namespace CocosDenshion;
 
 AppDelegate::AppDelegate() {
 
@@ -26,12 +30,23 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
-    if(!glview) {
-        glview = GLViewImpl::createWithRect("HelloCpp", Rect(0, 0, 960, 640));
+    if(!glview) { 
+        glview = GLViewImpl::create("test");
         director->setOpenGLView(glview);
     }
 
-    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	std::vector<Size> sizeVec;
+	sizeVec.push_back(Size(1280, 720));
+	sizeVec.push_back(Size(960, 640));
+	sizeVec.push_back(Size(960, 540));
+	sizeVec.push_back(Size(728, 480));
+	sizeVec.push_back(Size(800, 480));
+	sizeVec.push_back(Size(854, 480));
+	glview->setFrameSize(360, 720);
+#endif
+
+    director->getOpenGLView()->setDesignResolutionSize(720, 1280, ResolutionPolicy::SHOW_ALL);
 
     // turn on display FPS
     director->setDisplayStats(true);
@@ -42,8 +57,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     FileUtils::getInstance()->addSearchPath("res");
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
 
+	auto scene = HelloWorld::sceneCreate();
     // run
     director->runWithScene(scene);
 
