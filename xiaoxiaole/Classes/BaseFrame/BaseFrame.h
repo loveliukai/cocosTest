@@ -13,6 +13,8 @@ public:
 	CREATE_SCENE(SceneBase);
 
 	void addScrollViewFrame();
+	void adjustScrollView(float);
+	Node *m_node;
 
 public:
 	//添加MyDataSource和MyTableView成员变量

@@ -6,7 +6,8 @@ bool SceneBase::init()
 {
 	if (!Layer::init())
 		return false;
-	Sprite *background = Sprite::create("../materials/logo@2x.png");
+	Node *background = Node::create();
+	m_node = background;
 	background->setPosition(WinSize.width / 2, WinSize.height / 2);
 	addChild(background);
 
@@ -45,6 +46,30 @@ void SceneBase::scrollViewDidScroll(ScrollView *view)
 void SceneBase::scrollViewDidZoom(ScrollView *view)
 {
 
+}
+
+void SceneBase::adjustScrollView(float)
+{
+	int curPos = m_node->getPositionX();
+	int minOff = 10 * WinSize.width;
+	int i;
+	for (i = 0; i < 5; ++i)
+	{
+		int adjustPos = -i*WinSize.width;
+		int offset = abs(curPos - adjustPos);
+
+		// 通过算法查找最接近的调整位置
+		if (offset < minOff)
+			minOff = offset;
+		else
+			break;
+	}
+
+	int adjustPos = -(i - 1)*WinSize.width;
+
+	CCAction* action = CCMoveTo::create(.1f, ccp(adjustPos, m_node->getPositionY()));
+	m_node->stopAllActions();
+	m_node->runAction(action);
 }
 
 
