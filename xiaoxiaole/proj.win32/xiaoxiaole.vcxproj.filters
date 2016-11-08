@@ -30,6 +30,12 @@
     <ClCompile Include="..\Classes\BaseFrame\BaseFrame.cpp">
       <Filter>src\BaseFrame</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BaseFrame\MyDataSource.cpp">
+      <Filter>src\BaseFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BaseFrame\MyTableView.cpp">
+      <Filter>src\BaseFrame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -51,6 +57,12 @@
       <Filter>src\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BaseFrame\BaseFrame.h">
+      <Filter>src\BaseFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BaseFrame\MyDataSource.h">
+      <Filter>src\BaseFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BaseFrame\MyTableView.h">
       <Filter>src\BaseFrame</Filter>
     </ClInclude>
   </ItemGroup>

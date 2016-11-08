@@ -11,7 +11,7 @@
 	return scene; \
 	}\
 
-#define getWinSize Director::getInstance()::getWinSize()
+#define WinSize Director::getInstance()->getWinSize()
 	
 
 #endif

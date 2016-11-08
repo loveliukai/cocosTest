@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "SimpleAudioEngine.h"
 #include "HelloWorldScene.h"
+#include "BaseFrame/BaseFrame.h"
 
 #include "AudioEngine.h"
 
@@ -43,10 +44,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	sizeVec.push_back(Size(728, 480));
 	sizeVec.push_back(Size(800, 480));
 	sizeVec.push_back(Size(854, 480));
-	glview->setFrameSize(360, 720);
+	glview->setFrameSize(600, 800);
 #endif
 
-    director->getOpenGLView()->setDesignResolutionSize(720, 1280, ResolutionPolicy::SHOW_ALL);
+    director->getOpenGLView()->setDesignResolutionSize(600, 800, ResolutionPolicy::EXACT_FIT);
 
     // turn on display FPS
     director->setDisplayStats(true);
@@ -58,7 +59,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
 
-	auto scene = HelloWorld::sceneCreate();
+	auto scene = SceneBase::sceneCreate();
     // run
     director->runWithScene(scene);
 
