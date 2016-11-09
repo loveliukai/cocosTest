@@ -7,6 +7,7 @@ MyDataSource::MyDataSource()
 		TableViewCell *cell = new TableViewCell;
 		cell->autorelease();
 		cell->setAnchorPoint(Vec2(.5, .5));
+		cell->setContentSize(WinSize);
 		cell->setPosition(Vec2(WinSize.width / 2, WinSize.height / 2));
 		//创建精灵显示内容
 		std::string tmp = Utils::GetFormatString("%d", i + 1);
