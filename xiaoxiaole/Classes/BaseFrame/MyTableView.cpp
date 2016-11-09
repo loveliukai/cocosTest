@@ -1,9 +1,11 @@
 
 #include "MyTableView.h"
+#include "BaseFrame/BaseFrame.h"
+#include "MyDataSource.h"
+MyTableView *MyTableView::table = nullptr;
 MyTableView * MyTableView::create(TableViewDataSource *source, Size size)
 {
-	MyTableView *table = new MyTableView;
-
+	table = new MyTableView;
 	//初始化
 	table->initWithViewSize(size, NULL);
 	table->autorelease();
@@ -11,7 +13,7 @@ MyTableView * MyTableView::create(TableViewDataSource *source, Size size)
 	table->_updateCellPositions();
 	table->_updateContentSize();
 
-
+	
 	return table;
 }
 
@@ -32,36 +34,94 @@ void MyTableView::onTouchEnded(Touch *pTouch, Event *pEvent)
 		Point ptInWorld = pTouch->getLocation();
 		Point ptInCell = _touchedCell->convertToNodeSpace(ptInWorld);
 
+		Point spInWorld = _touchedCell->convertToWorldSpace(sprite->getPosition());
+		if (spInWorld.x > 0 && spInWorld.x < WinSize.width)
+		{
+			sprite->runAction(MoveTo::create(.1f, Vec2(WinSize.width / 2, WinSize.height / 2)));
+		}
 
-		if (rcSprite.containsPoint(ptInCell) && _tableViewDelegate != NULL)
+
+		if (/*rcSprite.containsPoint(ptInCell) &&*/ _tableViewDelegate != NULL)
 		{
 			_tableViewDelegate->tableCellUnhighlight(this, _touchedCell);
 			_tableViewDelegate->tableCellTouched(this, _touchedCell);
+			
 		}
+
+		
+		
+		
 		this->_touchedCell = NULL;
 	}
 	ScrollView::onTouchEnded(pTouch, pEvent);
 }
 
-#if 0
+#if 1
 bool MyTableView::onTouchBegan(Touch *pTouch, Event *pEvent)
 {
-	/*if (!this->isVisible())
-	{
-	return false;
-	}
-	if (_touchedCell)
-	{
-	m_TouchDown = pTouch;
-	return true;
-	}*/
-
-	return true;
+		
+		m_PointStart = pTouch->getLocation();//得到节点坐标系
+		return TableView::onTouchBegan(pTouch, pEvent);
 }
 
 void MyTableView::onTouchMoved(Touch *pTouch, Event *pEvent)
 {
-	ScrollView::onTouchMoved(pTouch, pEvent);
+	Point point = pTouch->getLocation();
+
+	if (_touchedCell /*&& isTouchMoved()*/)
+	{
+		Vector<Node *> vec = (Vector<Node *>) _touchedCell->getChildren();
+		Sprite *sprite = (Sprite *)vec.at(0);
+		Point pt = _touchedCell->convertToWorldSpace(sprite->getPosition());
+		Point ptStart = _touchedCell->convertToNodeSpace(m_PointStart);
+		Point ptMove = _touchedCell->convertToNodeSpace(point);
+
+		int index = _touchedCell->getIdx();
+		if (index == 0)
+		{
+			if (point.x - m_PointStart.x > 0 && pt.x >= WinSize.width / 2)
+			{
+				;
+			}
+			else
+			{
+				ScrollView::onTouchMoved(pTouch, pEvent);
+				
+				CCLOG("X:%f    Y:%f\n", pt.x, pt.y);
+			}
+
+		}
+
+		else if (index == 2)
+		{
+			if (point.x - m_PointStart.x < 0 && pt.x <= WinSize.width / 2)
+			{
+				//ScrollView::onTouchMoved(pTouch, pEvent);
+				;
+			}
+			else
+			{
+				ScrollView::onTouchMoved(pTouch, pEvent);
+
+			}
+		}
+		else
+		{
+			ScrollView::onTouchMoved(pTouch, pEvent);
+
+		}
+		
+		if (_tableViewDelegate != nullptr)
+		{
+			_tableViewDelegate->tableCellUnhighlight(this, _touchedCell);
+		}
+
+		//_touchedCell = nullptr;
+	}
+
+
+	
+	
 }
 #endif
 

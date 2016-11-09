@@ -12,6 +12,7 @@ bool SceneBase::init()
 	addChild(background);
 
 	addScrollViewFrame();
+	//schedule(schedule_selector(SceneBase::adjustScrollView), .1f);
 
 	return true;
 }
@@ -21,7 +22,7 @@ void SceneBase::addScrollViewFrame()
 {
 	m_dataSource = new MyDataSource();
 	MyTableView *view = MyTableView::create(m_dataSource, WinSize);
-
+	m_table = view;
 	this->addChild(view);
 	//Ë®Æ½¹ö¶¯
 	view->setDirection(ScrollView::Direction::HORIZONTAL);
@@ -51,9 +52,9 @@ void SceneBase::scrollViewDidZoom(ScrollView *view)
 void SceneBase::adjustScrollView(float)
 {
 	int curPos = m_node->getPositionX();
-	int minOff = 10 * WinSize.width;
+	int minOff = 6 * WinSize.width;
 	int i;
-	for (i = 0; i < 5; ++i)
+	for (i = 0; i < 3; ++i)
 	{
 		int adjustPos = -i*WinSize.width;
 		int offset = abs(curPos - adjustPos);

@@ -148,7 +148,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\BaseFrame\BaseFrame.cpp" />
     <ClCompile Include="..\Classes\BaseFrame\MyDataSource.cpp" />
     <ClCompile Include="..\Classes\BaseFrame\MyTableView.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,7 +158,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Common\Common.h" />
     <ClInclude Include="..\Classes\Common\Earse.h" />
     <ClInclude Include="..\Classes\Common\Utils.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

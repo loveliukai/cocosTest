@@ -7,7 +7,7 @@
 class MyDataSource : public TableViewDataSource
 {
 public:
-std::vector <TableViewCell *> m_cells;
+Vector <TableViewCell *> m_cells;
 
 //重载TableViewDataSource类的虚函数
 virtual Size cellSizeForTable(TableView *table);

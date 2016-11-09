@@ -6,14 +6,16 @@ MyDataSource::MyDataSource()
 	{
 		TableViewCell *cell = new TableViewCell;
 		cell->autorelease();
-		m_cells.push_back(cell);
+		cell->setAnchorPoint(Vec2(.5, .5));
+		cell->setPosition(Vec2(WinSize.width / 2, WinSize.height / 2));
 		//创建精灵显示内容
 		std::string tmp = Utils::GetFormatString("%d", i + 1);
 		std::string str = "cg/xxl_ftbg" + tmp + ".png";
 		Sprite *sprite = Sprite::create(str);
 
+		sprite->setAnchorPoint(Vec2(.5, .5));
 		cell->addChild(sprite);
-
+		m_cells.pushBack(cell);
 		//设置位置
 		sprite->setPosition(Vec2(WinSize.width / 2, WinSize.height / 2));
 	

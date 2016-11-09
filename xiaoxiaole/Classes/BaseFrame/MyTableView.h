@@ -6,10 +6,12 @@
 class MyTableView : public TableView
 {
 public:
-	Touch *m_TouchDown;
+	//
+	Point m_PointStart;
+	static MyTableView *table ;
 	static MyTableView *create(TableViewDataSource *source, Size size);
-	//virtual bool onTouchBegan(Touch *pTouch, Event *pEvent);
-	//virtual void onTouchMoved(Touch *pTouch, Event *pEvent);
+	virtual bool onTouchBegan(Touch *pTouch, Event *pEvent);
+	virtual void onTouchMoved(Touch *pTouch, Event *pEvent);
 	virtual void onTouchEnded(Touch *pTouch, Event *pEvent);
 };
 

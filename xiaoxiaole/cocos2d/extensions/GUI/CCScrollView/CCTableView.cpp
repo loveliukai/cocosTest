@@ -638,7 +638,7 @@ bool TableView::onTouchBegan(Touch *pTouch, Event *pEvent)
 
 void TableView::onTouchMoved(Touch *pTouch, Event *pEvent)
 {
-    ScrollView::onTouchMoved(pTouch, pEvent);
+    ScrollView::onTouchMoved (pTouch, pEvent);
 
     if (_touchedCell && isTouchMoved())
     {
