@@ -99,14 +99,14 @@ void MyTableView::onTouchMoved(Touch *pTouch, Event *pEvent)
 		{
 			if (point.x - m_PointStart.x > 0 && pt.x >= WinSize.width / 2)
 			{
-				;
+				setTouchEnabled(false);
 			}
-			else
+			/*else
 			{
-				ScrollView::onTouchMoved(pTouch, pEvent);
-				
-				CCLOG("X:%f    Y:%f\n", pt.x, pt.y);
-			}
+			ScrollView::onTouchMoved(pTouch, pEvent);
+
+			CCLOG("X:%f    Y:%f\n", pt.x, pt.y);
+			}*/
 
 		}
 
@@ -114,25 +114,21 @@ void MyTableView::onTouchMoved(Touch *pTouch, Event *pEvent)
 		{
 			if (point.x - m_PointStart.x < 0 && pt.x <= WinSize.width / 2)
 			{
-				//ScrollView::onTouchMoved(pTouch, pEvent);
-				;
+				setTouchEnabled(false);
 			}
-			else
+			/*else
 			{
 				ScrollView::onTouchMoved(pTouch, pEvent);
 
-			}
+			}*/
 		}
-		else
-		{
 			ScrollView::onTouchMoved(pTouch, pEvent);
-
-		}
-		
+	
 		if (_tableViewDelegate != nullptr)
 		{
 			_tableViewDelegate->tableCellUnhighlight(this, _touchedCell);
 		}
+		setTouchEnabled(true);
 
 		//_touchedCell = nullptr;
 	}
